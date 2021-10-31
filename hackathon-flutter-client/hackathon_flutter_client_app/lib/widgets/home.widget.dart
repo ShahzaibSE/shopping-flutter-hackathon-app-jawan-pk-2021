@@ -463,26 +463,18 @@ class _HomeWidgetState extends State<HomeWidget> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Container(
-                        margin: const EdgeInsets.all(20),
-                        child: Stack(children: <Widget>[
+                      margin: const EdgeInsets.all(20),
+                      child: Stack(
+                        children: <Widget>[
                           Align(
-                            child: Text('Popular Items',
+                            child: Text('Items',
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold, fontSize: 30)),
                             alignment: Alignment.topLeft,
                           )
-                        ])),
-                    Container(
-                        margin: const EdgeInsets.only(top: 5, right: 20),
-                        child: Stack(children: <Widget>[
-                          Align(
-                            child: InkWell(
-                                child: Text('More Items',
-                                    style: TextStyle(
-                                        fontSize: 17, color: Colors.purple))),
-                            alignment: Alignment.topRight,
-                          )
-                        ])),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
