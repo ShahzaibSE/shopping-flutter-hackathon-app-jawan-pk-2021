@@ -28,46 +28,59 @@ class _HomeWidgetState extends State<HomeWidget> {
     return Container(
         // width: MediaQuery.of(context).size.width,
         child: Card(
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Column(children: <Widget>[
-        Container(
-            child: Image(
-                image: AssetImage(Ads.FeaturedAdsDB[index].imageUrl),
-                width: MediaQuery.of(context).size.width,
-                height: 250)),
-      ]),
-      Container(
-          padding: const EdgeInsets.only(left: 20, right: 20),
-          child: Row(children: <Widget>[
-            Container(
-              child: Text(Ads.FeaturedAdsDB[index].title,
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-            )
-          ])),
-      Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-        Container(
-            width: MediaQuery.of(context).size.width,
-            padding:
-                const EdgeInsets.only(left: 20, top: 10, bottom: 10, right: 20),
-            child: Row(
-              children: [
-                Icon(Icons.star, color: Colors.yellow, size: 20),
-                Icon(Icons.star, color: Colors.yellow, size: 20),
-                Icon(Icons.star, color: Colors.yellow, size: 20),
-                Icon(Icons.star, color: Colors.yellow, size: 20),
-                Icon(Icons.star, color: Colors.yellow, size: 20),
-                Container(
-                    padding: const EdgeInsets.only(left: 10, right: 10),
-                    child: Text('5.0 (23 Reviews)',
-                        style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold)))
-              ],
-            )),
-      ])
-    ])));
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Column(children: <Widget>[
+                    Container(
+                      child: Image(
+                          image: AssetImage(Ads.FeaturedAdsDB[index].imageUrl),
+                          width: MediaQuery.of(context).size.width - 20,
+                          height: 250),
+                    ),
+                  ]),
+                  Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 20),
+                      child: Stack(children: <Widget>[
+                        Align(
+                          alignment: Alignment.center,
+                          child: Container(
+                            child: Text(
+                              Ads.FeaturedAdsDB[index].title,
+                              style: TextStyle(
+                                  fontSize: 25, fontWeight: FontWeight.bold),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        )
+                      ])),
+                  // Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+                  //   Container(
+                  //       width: MediaQuery.of(context).size.width,
+                  //       padding:
+                  //           const EdgeInsets.only(left: 20, top: 10, bottom: 10, right: 20),
+                  //       child: Row(
+                  //         children: [
+                  //           Icon(Icons.star, color: Colors.yellow, size: 20),
+                  //           Icon(Icons.star, color: Colors.yellow, size: 20),
+                  //           Icon(Icons.star, color: Colors.yellow, size: 20),
+                  //           Icon(Icons.star, color: Colors.yellow, size: 20),
+                  //           Icon(Icons.star, color: Colors.yellow, size: 20),
+                  //           Container(
+                  //               padding: const EdgeInsets.only(left: 10, right: 10),
+                  //               child: Text('5.0 (23 Reviews)',
+                  //                   style: TextStyle(
+                  //                       color: Colors.grey,
+                  //                       fontSize: 15,
+                  //                       fontWeight: FontWeight.bold)))
+                  //         ],
+                  //       )),
+                  // ])
+                ])));
   }
 
   //

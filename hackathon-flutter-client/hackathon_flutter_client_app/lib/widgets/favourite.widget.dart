@@ -18,6 +18,8 @@ class _FavouriteState extends State<FavouriteWidget> {
 
   deleteFavourite(int index) async {}
 
+  addToCart() async {}
+
   Widget buildFavourite(ProductModel product, int index) {
     return Card(
       child: GestureDetector(
@@ -87,6 +89,15 @@ class _FavouriteState extends State<FavouriteWidget> {
                     deleteFavourite(
                       ProductModel.products[index]["_id"],
                     );
+                  });
+                },
+              ),
+              IconSlideAction(
+                color: Colors.red,
+                icon: Icons.add_shopping_cart_rounded,
+                onTap: () {
+                  setState(() {
+                    addToCart();
                   });
                 },
               ),
