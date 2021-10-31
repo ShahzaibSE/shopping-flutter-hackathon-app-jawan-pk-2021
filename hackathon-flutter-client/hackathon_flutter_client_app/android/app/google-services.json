@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "492141832736",
+    "project_id": "user-auth-portal-8161e",
+    "storage_bucket": "user-auth-portal-8161e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:492141832736:android:3d2112c38e182bf9396a45",
+        "android_client_info": {
+          "package_name": "com.example.hackathon_flutter_client_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "492141832736-ndanrsg8d50gvcvm78nm7udtcdoh6dsp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtB1Jp6RGvhucOSkwfhEEDN4Jl-mCxoLI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "492141832736-ndanrsg8d50gvcvm78nm7udtcdoh6dsp.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "492141832736-54vuimdu711po19ppl6r8it18g0dc9es.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.jawanpk.hackathonFlutterClientApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
