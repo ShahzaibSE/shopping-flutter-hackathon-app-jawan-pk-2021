@@ -90,10 +90,6 @@ exports.Category = new mongoose_1.Schema({
     }
 });
 exports.Product = new mongoose_1.Schema({
-    uid: {
-        type: String,
-        required: true
-    },
     image: {
         type: String
     },
@@ -135,6 +131,9 @@ exports.Cart = new mongoose_1.Schema({
     },
     quantity: {
         type: Number
+    },
+    category: {
+        type: String
     },
     createdAt: {
         type: String,

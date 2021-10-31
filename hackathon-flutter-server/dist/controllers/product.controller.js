@@ -37,7 +37,6 @@ const addProduct = async (req, res) => {
     try {
         const { uid, name, price, image, discount, description } = req.body;
         let newProduct = new product_model({
-            uid,
             name,
             price,
             image,
@@ -45,16 +44,27 @@ const addProduct = async (req, res) => {
             discount,
         });
         newProduct.save((err, data) => {
-            res.setHeader("Content-Type", "application/json");
-            res.status(200).send({
-                status: true,
-                resCode: 200,
-                message: "Product added successfully",
-                isError: false,
-                data,
-            });
+            if (err) {
+                res.setHeader("Content-Type", "application/json");
+                res.status(500).send({
+                    status: false,
+                    resCode: 500,
+                    message: "Product couldn't be inserted successfully",
+                    isError: true,
+                    data,
+                });
+            }
+            else {
+                res.setHeader("Content-Type", "application/json");
+                res.status(200).send({
+                    status: true,
+                    resCode: 200,
+                    message: "Product added successfully",
+                    isError: false,
+                    data,
+                });
+            }
         });
-        //   }
     }
     catch (e) {
         throw e;

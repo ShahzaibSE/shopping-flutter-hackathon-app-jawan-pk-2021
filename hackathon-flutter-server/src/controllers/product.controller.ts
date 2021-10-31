@@ -36,7 +36,6 @@ export const addProduct = async (req: Request, res: Response) => {
     try {
         const {uid, name, price, image, discount, description} = req.body;
             let newProduct = new product_model({
-              uid,
               name,
               price,
               image,
@@ -44,6 +43,15 @@ export const addProduct = async (req: Request, res: Response) => {
               discount,
             });
             newProduct.save((err, data) => {
+                if(err){
+                    res.setHeader("Content-Type", "application/json");
+                    res.status(500).send({
+                      status: false,
+                      resCode: 500,
+                      message: "Product couldn't be inserted successfully",
+                      isError: true,
+                      data,
+                    });                }else {
               res.setHeader("Content-Type", "application/json");
               res.status(200).send({
                 status: true,
@@ -52,9 +60,8 @@ export const addProduct = async (req: Request, res: Response) => {
                 isError: false,
                 data,
               });
-            });
-        //   }
-
+            }
+        });
     }catch(e) {
         throw e;
     }

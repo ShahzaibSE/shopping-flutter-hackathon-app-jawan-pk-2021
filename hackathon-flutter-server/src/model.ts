@@ -94,10 +94,6 @@ export const Category = new Schema({
 });
 
 export const Product = new Schema({
-    uid: {
-        type: String,
-        required: true
-    },
     image: {
         type: String
     },
@@ -140,6 +136,9 @@ export const Cart = new Schema({
     },
     quantity: {
         type: Number
+    },
+    category: {
+        type: String
     },
     createdAt: {
         type: String,
