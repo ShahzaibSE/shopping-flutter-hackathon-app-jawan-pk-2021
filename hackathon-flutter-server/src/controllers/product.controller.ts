@@ -5,21 +5,10 @@ import { dbInjector } from "./dbInjector";
 
 const product_model = dbInjector().product;
 
-export const addtoCart = async (req: Request, res: Response) => {
+export const addProduct = async (req: Request, res: Response) => {
     try {
         const {uid, name, price, image, discount, description} = req.body;
-        //
-        const existingItemCart = await product_model.findOne({name});
-        //
-        if(existingItemCart) {
-            res.status(200).send({
-                resCode: 200,
-                status: true,
-                isError: false,
-                message: "Product already exists."
-            });
-        }else {
-            let newItemCart = new product_model({
+            let newProduct = new product_model({
               uid,
               name,
               price,
@@ -27,7 +16,7 @@ export const addtoCart = async (req: Request, res: Response) => {
               description,
               discount,
             });
-            newItemCart.save((err, data) => {
+            newProduct.save((err, data) => {
               res.setHeader("Content-Type", "application/json");
               res.status(200).send({
                 status: true,
@@ -37,14 +26,14 @@ export const addtoCart = async (req: Request, res: Response) => {
                 data,
               });
             });
-          }
+        //   }
 
     }catch(e) {
         throw e;
     }
 }
 
-export const deleteFromCart = async (req: Request, res: Response) => {
+export const deleteProduct = async (req: Request, res: Response) => {
    try{ 
     var deletedDocument = await product_model.deleteOne({
         _id: req.params._id,
@@ -71,7 +60,7 @@ export const deleteFromCart = async (req: Request, res: Response) => {
    }
 }
 
-export const getCartItems = async (req: Request, res: Response) => {
+export const getProducts = async (req: Request, res: Response) => {
     try {
         const uid = req.query.uid;
         const cartList: Array<any> = await product_model.find({});

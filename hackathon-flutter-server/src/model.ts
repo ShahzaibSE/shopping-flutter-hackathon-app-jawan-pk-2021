@@ -108,6 +108,9 @@ export const Product = new Schema({
     price: {
         type: String,
     },
+    category: {
+        type: String,
+    },
     description: {
         type: String,
     },
