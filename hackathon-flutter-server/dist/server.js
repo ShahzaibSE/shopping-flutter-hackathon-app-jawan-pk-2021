@@ -16,12 +16,14 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const user_router_1 = __importDefault(require("./routes/user.router"));
 const favourite_router_1 = __importDefault(require("./routes/favourite.router"));
 const profile_router_1 = __importDefault(require("./routes/profile.router"));
+const cart_router_1 = __importDefault(require("./routes/cart.router"));
+const product_router_1 = __importDefault(require("./routes/product.router"));
 const app = express_1.default();
 const { BAD_REQUEST } = http_status_codes_1.default;
 /************************************************************************************
  *                              Set basic Mongodb Settings.
  ***********************************************************************************/
-const mongodb_con_string = "mongodb+srv://shahzaibnoor:zx11223344@cluster0.gkvk4.mongodb.net/newsapp?retryWrites=true&w=majority";
+const mongodb_con_string = "mongodb+srv://shahzaibnoor:zx112233445566@cluster0.hdy11.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 mongoose_1.default.connect(mongodb_con_string, {
 // useCreateIndex: true,
 // useUnifiedTopology: true,
@@ -39,6 +41,8 @@ app.use(cors_1.default());
 app.use("/user", user_router_1.default);
 app.use("/favourite", favourite_router_1.default);
 app.use("/profile", profile_router_1.default);
+app.use("/cart", cart_router_1.default);
+app.use("/product", product_router_1.default);
 // Show routes called in console during development
 if (process.env.NODE_ENV === 'development') {
     app.use(morgan_1.default('dev'));

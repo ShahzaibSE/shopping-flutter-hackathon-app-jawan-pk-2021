@@ -6,7 +6,8 @@ const dbInjector_1 = require("./dbInjector");
 const favourite_model = dbInjector_1.dbInjector().favourite;
 const getAllFavourites = async (req, res) => {
     try {
-        const favouritesList = await favourite_model.find({});
+        const uid = req.query.uid;
+        const favouritesList = await favourite_model.find({ uid });
         if (!favouritesList) {
             res.setHeader("Content-Type", "application/json");
             res.status(400).send({
@@ -33,8 +34,8 @@ const getAllFavourites = async (req, res) => {
 };
 exports.getAllFavourites = getAllFavourites;
 const addFavourite = async (req, res) => {
-    const { uid, title, description, image, video, category, author, url, source, country, } = req.body;
-    let existingFavourite = await favourite_model.findOne({ title });
+    const { uid, name, description, discount, price, category, image, } = req.body;
+    let existingFavourite = await favourite_model.findOne({ name });
     if (existingFavourite) {
         res.status(403).send({
             status: false,
@@ -46,15 +47,12 @@ const addFavourite = async (req, res) => {
     else {
         let newFavourite = new favourite_model({
             uid,
-            title,
+            name,
             description,
-            image,
-            video,
+            discount,
+            price,
             category,
-            author,
-            url,
-            source,
-            country,
+            image,
         });
         newFavourite.save((err, data) => {
             res.setHeader("Content-Type", "application/json");
