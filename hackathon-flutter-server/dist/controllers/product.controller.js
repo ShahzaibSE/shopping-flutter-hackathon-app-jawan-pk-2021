@@ -51,7 +51,6 @@ const addProduct = async (req, res) => {
                     resCode: 500,
                     message: "Product couldn't be inserted successfully",
                     isError: true,
-                    data,
                 });
             }
             else {
