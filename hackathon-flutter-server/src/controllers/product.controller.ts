@@ -5,6 +5,33 @@ import { dbInjector } from "./dbInjector";
 
 const product_model = dbInjector().product;
 
+export const searchByCategory = async (req: Request, res: Response) => {
+    try {
+        const category = req.query.category;
+        const productList: Array<any> = await product_model.find({category});
+        if (!productList) {
+            res.setHeader("Content-Type", "application/json");
+            res.status(400).send({
+                status: false,
+                resCode: 400,
+                message: "Product of respected category not found",
+                isError: true,
+            });
+        } else {
+            res.setHeader("Content-Type", "application/json");
+            res.status(200).send({
+                status: true,
+                resCode: 200,
+                message: "Successfully found product with respect to category",
+                isError: false,
+                data: productList,
+            });
+        }
+    } catch(e) {
+        throw e;
+    }
+}
+
 export const addProduct = async (req: Request, res: Response) => {
     try {
         const {uid, name, price, image, discount, description} = req.body;
@@ -63,8 +90,8 @@ export const deleteProduct = async (req: Request, res: Response) => {
 export const getProducts = async (req: Request, res: Response) => {
     try {
         const uid = req.query.uid;
-        const cartList: Array<any> = await product_model.find({});
-        if (!cartList) {
+        const productList: Array<any> = await product_model.find({});
+        if (!productList) {
             res.setHeader("Content-Type", "application/json");
             res.status(400).send({
             status: false,
@@ -79,7 +106,7 @@ export const getProducts = async (req: Request, res: Response) => {
             resCode: 200,
             message: "Products found successfully",
             isError: false,
-            data: cartList,
+            data: productList,
             });
         }
         } catch (err) {
