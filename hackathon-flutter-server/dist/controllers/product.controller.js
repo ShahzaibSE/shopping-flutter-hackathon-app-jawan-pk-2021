@@ -45,7 +45,7 @@ const addProduct = async (req, res) => {
         });
         newProduct.save((err, data) => {
             if (err) {
-                res.setHeader("Content-Type", "application/json");
+                // res.setHeader("Content-Type", "application/json");
                 res.status(500).send({
                     status: false,
                     resCode: 500,
@@ -91,7 +91,7 @@ const deleteProduct = async (req, res) => {
                 status: false,
                 resCode: 424,
                 message: "Product could not be deleted",
-                isError: true
+                isError: true,
             });
         }
     }

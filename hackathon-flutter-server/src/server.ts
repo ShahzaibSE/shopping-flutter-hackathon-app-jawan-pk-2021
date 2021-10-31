@@ -23,7 +23,7 @@ const { BAD_REQUEST } = StatusCodes;
  *                              Set basic Mongodb Settings.
  ***********************************************************************************/
 
-const mongodb_con_string = "mongodb+srv://shahzaibnoor:zx112233445566@cluster0.hdy11.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const mongodb_con_string = "mongodb+srv://shahzaibnoor:zx11223344@cluster0.0g70j.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 mongoose.connect(mongodb_con_string, {
     // useCreateIndex: true,
     // useUnifiedTopology: true,
