@@ -21,7 +21,7 @@ class _UserAuthState extends State<UserAuth> {
         maxHeight: MediaQuery.of(context).size.height,
         child: Container(
           decoration: const BoxDecoration(
-            color: Colors.redAccent,
+            color: Colors.purpleAccent,
           ),
           padding: const EdgeInsets.only(top: 50),
           child: Center(

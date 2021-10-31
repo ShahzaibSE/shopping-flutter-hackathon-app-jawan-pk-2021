@@ -1,6 +1,12 @@
 import "package:flutter/material.dart";
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import "package:firebase_auth/firebase_auth.dart";
+import "dart:convert";
+import "package:http/http.dart" as http;
 // Model.
 import "./models/product.model.dart";
+// Widget
+import "./user-auth-container.widget.dart";
 
 class ProductDetails extends StatefulWidget {
   const ProductDetails(
@@ -18,9 +24,93 @@ class ProductDetails extends StatefulWidget {
 }
 
 class _ProductDetailsState extends State<ProductDetails> {
-  addToCart(ProductModel product) async {}
+  addToCart(ProductModel product) async {
+    try {
+      FirebaseAuth auth = FirebaseAuth.instance;
+      //
+      if (auth.currentUser == null) {
+        // Open up Modal Bottom Sheet.
+        showMaterialModalBottomSheet(
+          context: context,
+          builder: (context) => const UserAuth(),
+        );
+      }
+    } catch (e) {}
+  }
 
-  addToFavourite(ProductModel product) async {}
+  addToFavourite(ProductModel product) async {
+    try {
+      FirebaseAuth auth = FirebaseAuth.instance;
+
+      if (auth.currentUser == null) {
+        // Open up Modal Bottom Sheet.
+        showMaterialModalBottomSheet(
+          context: context,
+          builder: (context) => const UserAuth(),
+        );
+      } else {
+        final User user = auth.currentUser as User;
+        final uid = user.uid;
+        var uri = Uri.http('localhost:3000', '/favourite/add');
+        var newFavourite = {'uid': uid, 'name': product.name};
+        if (product.imageUrl != null) {
+          newFavourite['imageUrl'] = product.imageUrl.toString();
+        }
+        if (product.description != null) {
+          newFavourite['description'] = product.description.toString();
+        }
+        if (product.category != null) {
+          newFavourite['category'] = product.category.toString();
+        }
+        if (product.category != null) {
+          newFavourite['name'] = product.name.toString();
+        }
+        if (product.category != null) {
+          newFavourite['price'] = product.price.toString();
+        }
+        if (product.category != null) {
+          newFavourite['discount'] = product.discount.toString();
+        }
+        if (product.category != null) {
+          newFavourite['description'] = product.description.toString();
+        }
+
+        var response = await http.post(uri, body: newFavourite);
+        var jsonResponse = jsonDecode(response.body);
+        //
+        if (jsonResponse['status'] == false) {
+          const ifAlreadyFavourite = AlertDialog(
+              title: Text(
+                "Favourite already exists.",
+                textAlign: TextAlign.center,
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10.0),
+                ),
+              ));
+          showDialog(
+              context: context, builder: (context) => ifAlreadyFavourite);
+        } else {
+          const newFavouriteAdded = AlertDialog(
+              title: Text(
+                "Favourite added!",
+                textAlign: TextAlign.center,
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10.0),
+                ),
+              ));
+          showDialog(context: context, builder: (context) => newFavouriteAdded);
+        }
+        //
+        return jsonResponse;
+      }
+    } catch (e) {
+      throw e;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

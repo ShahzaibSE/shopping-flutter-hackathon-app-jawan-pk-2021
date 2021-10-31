@@ -4,11 +4,18 @@ class ProductModel {
   String? description;
   String? price;
   String? discount;
+  String? category;
 
   static List products = [];
 
-  ProductModel(
-      {this.imageUrl, this.name, this.price, this.discount, this.description});
+  ProductModel({
+    this.imageUrl,
+    this.name,
+    this.price,
+    this.discount,
+    this.description,
+    this.category,
+  });
 }
 
 class PreviousOrderModel {
