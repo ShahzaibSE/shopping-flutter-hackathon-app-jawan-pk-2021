@@ -34,6 +34,41 @@ class _ProductDetailsState extends State<ProductDetails> {
           context: context,
           builder: (context) => const UserAuth(),
         );
+      } else {
+        final User user = auth.currentUser as User;
+        final uid = user.uid;
+        var uri = Uri.http('localhost:3000', '/cart/add');
+        var newCartItem = {'uid': uid, 'name': product.name};
+        if (product.imageUrl != null) {
+          newCartItem['imageUrl'] = product.imageUrl.toString();
+        }
+        if (product.category != null) {
+          newCartItem['category'] = product.category.toString();
+        }
+        if (product.category != null) {
+          newCartItem['name'] = product.name.toString();
+        }
+        if (product.category != null) {
+          newCartItem['price'] = product.price.toString();
+        }
+
+        var response = await http.post(uri, body: newCartItem);
+        var jsonResponse = jsonDecode(response.body);
+
+        const newCartItemAddedDialog = AlertDialog(
+            title: Text(
+              "Added to Cart!",
+              textAlign: TextAlign.center,
+            ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(10.0),
+              ),
+            ));
+        showDialog(
+            context: context, builder: (context) => newCartItemAddedDialog);
+
+        return jsonResponse;
       }
     } catch (e) {
       throw e;
