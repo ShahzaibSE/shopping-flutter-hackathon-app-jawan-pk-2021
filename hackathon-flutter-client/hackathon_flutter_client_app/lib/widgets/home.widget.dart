@@ -86,39 +86,42 @@ class _HomeWidgetState extends State<HomeWidget> {
   //
   Widget generateCategoryList(
       Icon icon, String categoryName, String numberOfItems) {
-    return Container(
-      margin: const EdgeInsets.all(10),
-      width: 250,
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Container(
-          padding: const EdgeInsets.all(10),
-          child: Row(
-            children: <Widget>[
-              Container(
-                  // padding: const EdgeInsets.only(bottom: 25),
-                  child: icon),
-              Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    //
-                    Container(
-                        padding: const EdgeInsets.only(left: 20, right: 10),
-                        child: Text(categoryName,
-                            style: TextStyle(
-                                fontSize: 25, fontWeight: FontWeight.bold))),
-                    Container(
-                        padding: const EdgeInsets.only(left: 20, right: 10),
-                        child: Text(numberOfItems,
-                            style: TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.bold)))
-                  ],
-                ),
-              )
-            ],
+    return GestureDetector(
+      onTap: () {},
+      child: Container(
+        margin: const EdgeInsets.all(10),
+        width: 250,
+        child: Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Container(
+            padding: const EdgeInsets.all(10),
+            child: Row(
+              children: <Widget>[
+                Container(
+                    // padding: const EdgeInsets.only(bottom: 25),
+                    child: icon),
+                Container(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      //
+                      Container(
+                          padding: const EdgeInsets.only(left: 20, right: 10),
+                          child: Text(categoryName,
+                              style: TextStyle(
+                                  fontSize: 25, fontWeight: FontWeight.bold))),
+                      Container(
+                          padding: const EdgeInsets.only(left: 20, right: 10),
+                          child: Text(numberOfItems,
+                              style: TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.bold)))
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),
@@ -464,11 +467,6 @@ class _HomeWidgetState extends State<HomeWidget> {
                         Icon(Icons.bolt, size: 30, color: Colors.purple),
                         'Appliances',
                         '5 Items'),
-                    generateCategoryList(
-                        Icon(Icons.double_arrow,
-                            size: 30, color: Colors.purple),
-                        'Other',
-                        '15 Items'),
                   ])),
 
               Container(
