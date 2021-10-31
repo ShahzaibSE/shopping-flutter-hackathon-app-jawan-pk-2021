@@ -35,7 +35,9 @@ class _ProductDetailsState extends State<ProductDetails> {
           builder: (context) => const UserAuth(),
         );
       }
-    } catch (e) {}
+    } catch (e) {
+      throw e;
+    }
   }
 
   addToFavourite(ProductModel product) async {

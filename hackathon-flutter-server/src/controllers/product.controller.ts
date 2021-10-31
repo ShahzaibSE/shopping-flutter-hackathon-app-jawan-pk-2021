@@ -3,38 +3,36 @@ import express, { Request, Response } from "express";
 // Model Injector.
 import { dbInjector } from "./dbInjector";
 
-const cart_model = dbInjector().cart;
+const product_model = dbInjector().product;
 
 export const addtoCart = async (req: Request, res: Response) => {
     try {
-        const {uid, name, price, image, quantity} = req.body;
+        const {uid, name, price, image, discount, description} = req.body;
         //
-        const existingItemCart = await cart_model.findOne({name});
+        const existingItemCart = await product_model.findOne({name});
         //
         if(existingItemCart) {
-            const updateItemInCart = await cart_model.updateOne({name}, {$set: {quantity: quantity + 1}});
-            const updatedItem = await cart_model.findOne({name});
             res.status(200).send({
                 resCode: 200,
                 status: true,
                 isError: false,
-                message: "Item quantity updated",
-                data: updatedItem
+                message: "Product already exists."
             });
         }else {
-            let newItemCart = new cart_model({
+            let newItemCart = new product_model({
               uid,
               name,
               price,
               image,
-              quantity: 1
+              description,
+              discount,
             });
             newItemCart.save((err, data) => {
               res.setHeader("Content-Type", "application/json");
               res.status(200).send({
                 status: true,
                 resCode: 200,
-                message: "Added to cart successfully",
+                message: "Product added successfully",
                 isError: false,
                 data,
               });
@@ -48,7 +46,7 @@ export const addtoCart = async (req: Request, res: Response) => {
 
 export const deleteFromCart = async (req: Request, res: Response) => {
    try{ 
-    var deletedDocument = await cart_model.deleteOne({
+    var deletedDocument = await product_model.deleteOne({
         _id: req.params._id,
       });
       if (deletedDocument) {
@@ -56,7 +54,7 @@ export const deleteFromCart = async (req: Request, res: Response) => {
         res.status(200).send({
           status: true,
           resCode: 200,
-          message: "Cart Item deleted successfully",
+          message: "Product deleted successfully",
           isError: false,
         });
       }else {
@@ -64,7 +62,7 @@ export const deleteFromCart = async (req: Request, res: Response) => {
         res.status(424).send({
             status: false,
             resCode: 424,
-            message: "Cart Item could not be deleted",
+            message: "Product could not be deleted",
             isError: true
         });
       }
@@ -76,13 +74,13 @@ export const deleteFromCart = async (req: Request, res: Response) => {
 export const getCartItems = async (req: Request, res: Response) => {
     try {
         const uid = req.query.uid;
-        const cartList: Array<any> = await cart_model.find({uid});
+        const cartList: Array<any> = await product_model.find({});
         if (!cartList) {
             res.setHeader("Content-Type", "application/json");
             res.status(400).send({
             status: false,
             resCode: 400,
-            message: "Cart is empty",
+            message: "No product found",
             isError: true,
             });
         } else {
@@ -90,7 +88,7 @@ export const getCartItems = async (req: Request, res: Response) => {
             res.status(200).send({
             status: true,
             resCode: 200,
-            message: "Successfully found cart list",
+            message: "Products found successfully",
             isError: false,
             data: cartList,
             });
